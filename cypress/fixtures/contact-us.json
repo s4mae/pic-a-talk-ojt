@@ -1,0 +1,26 @@
+{
+    "selectors": {
+        "firstname_field": "input[name = 'firstname']",
+        "lastname_field": "input[name = 'lastname']",
+        "email_field": "div#hsForm input[name = 'email']",
+        "compancyname_field": "input[name = 'company']",
+        "street_field": "input[name = 'address']",
+        "city_field": "input[name = 'city']",
+        "state_field": "input[name = 'state']",
+        "jobtitle_field": "input[name = 'jobtitle']",
+        "phonenumber_field": "input[name = 'phone']",
+        "message_field": "textarea[name = 'message']"
+    },
+    "userdata": {
+        "firstname": "Jessa",
+        "lastname": "Dalida",
+        "email": "jdalida@innovuze.com",
+        "compancyname": "innovuze",
+        "street": "lapasan",
+        "city": "cdeo",
+        "state": "mis or",
+        "jobtitle": "qa engineer",
+        "phonenumber": "555-555-555",
+        "message": "hello, this is a test"
+    }
+}

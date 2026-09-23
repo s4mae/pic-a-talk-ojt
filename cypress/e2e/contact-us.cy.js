@@ -47,16 +47,18 @@ describe("Pic-A-Talk Contact Us Page Test Cases", () => {
 
   it("Verify user can enter a valid email address", () => {
 
-    const testEmail = "test@example.com"
+  const testEmail = "test@example.com"
 
-    cy.get('input[type="email"]')
-      .filter(":visible")
-      .first()
-      .clear()
-      .type(testEmail)
-      .should("have.value", testEmail)
+  cy.get(
+    'input[placeholder="Email Address"], input[data-field_type="email"], input[data-original_id="email"]'
+  )
+    .filter(":visible")
+    .first()
+    .clear()
+    .type(testEmail)
+    .should("have.value", testEmail)
 
-  })
+ })
 
 
   // ============================================================
@@ -146,15 +148,17 @@ describe("Pic-A-Talk Contact Us Page Test Cases", () => {
       )
 
     // Email
-    cy.get('input[type="email"]')
-      .filter(":visible")
-      .first()
-      .clear()
-      .type(testEmail)
-      .should(
+    cy.get(
+    'input[placeholder="Email Address"], input[data-field_type="email"], input[data-original_id="email"]'
+    )
+    .filter(":visible")
+    .first()
+    .clear()
+    .type(testEmail)
+    .should(
         "have.value",
         testEmail
-      )
+    )
 
     // Type of Inquiry
     cy.get("select")

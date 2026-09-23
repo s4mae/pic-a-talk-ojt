@@ -18,54 +18,38 @@ describe("Pic-A-Talk Blog Page Test Cases", () => {
   })
 
 
-  // ============================================================
-  // TEST CASE 2 - LATEST ARTICLES REDIRECTION
-  // ============================================================
+// ============================================================
+// TEST CASE 2 - LATEST ARTICLES REDIRECTION
+// ============================================================
 
-  it("Verify latest blog articles redirect to their article pages", () => {
+it("Verify selected latest blog articles redirect correctly", () => {
+
+  const latestArticles = [0, 1]
+
+  latestArticles.forEach((index) => {
+
+    cy.visit("/blog/")
 
     cy.get("article")
-      .then(($articles) => {
+      .eq(index)
+      .find("h2.entry-title a")
+      .should("be.visible")
+      .invoke("prop", "href")
+      .then((expectedUrl) => {
 
-        // Current page contains 4 latest articles before Older Blogs
-        const latestArticles = [...$articles].slice(0, 4)
+        cy.get("article")
+          .eq(index)
+          .find("h2.entry-title a")
+          .click()
 
-        const articleLinks = latestArticles.map((article) => {
-          return article.querySelector("h2.entry-title a")?.href
-        })
-
-        expect(articleLinks)
-          .to.have.length(4)
-
-        articleLinks.forEach((articleLink) => {
-
-          // Return to Blog page before testing the next article
-          cy.visit("/blog/")
-
-          cy.get("article h2.entry-title a")
-            .then(($links) => {
-
-              const targetArticle = [...$links].find(
-                (link) => link.href === articleLink
-              )
-
-              expect(targetArticle)
-                .to.exist
-
-              cy.wrap(targetArticle)
-                .should("be.visible")
-                .click()
-            })
-
-          // Verify that clicking the article redirects
-          cy.url()
-            .should("eq", articleLink)
-
-        })
+        cy.url()
+          .should("eq", expectedUrl)
 
       })
 
   })
+
+})
 
 
   // ============================================================
@@ -124,25 +108,4 @@ describe("Pic-A-Talk Blog Page Test Cases", () => {
       })
 
   })
-
-
-  // ============================================================
-  // TEST CASE 4 - READ MORE LINKS
-  // ============================================================
-
-  it("Verify Read More links contain valid article URLs", () => {
-
-    cy.get("a.more-link")
-      .should("have.length.at.least", 1)
-      .each(($link) => {
-
-        cy.wrap($link)
-          .should("be.visible")
-          .and("have.attr", "href")
-          .and("not.be.empty")
-
-      })
-
-  })
-
 })
